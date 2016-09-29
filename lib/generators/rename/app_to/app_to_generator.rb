@@ -12,6 +12,7 @@ module Rename
         valid?
         new_app_module
         new_app_directory
+        remove_git_origin
       end
 
       protected
@@ -101,6 +102,12 @@ module Rename
           gem_set_file = '.ruby-gemset'
           replace_into_file(gem_set_file, old_basename, app_dir) if File.exist?(gem_set_file)
         end
+      end
+
+      def remove_git_origin
+        puts 'Removing git origin'
+        system 'git remote rm origin'
+        puts 'Removed git origin'
       end
 
       def rename_directory
